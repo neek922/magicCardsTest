@@ -3,7 +3,7 @@ export interface ICardResponseData {
 	total_cards: number;
 	has_more: boolean;
 	data: ICard[];
-	isNoteFound?: boolean;
+	isNotFound?: boolean;
 }
 
 

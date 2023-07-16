@@ -2,22 +2,28 @@ import React from 'react';
 import SearchInput from '../UI/SearchInput';
 import SortInput from '../UI/SortInput';
 import { SORT_DIR, SORT_TYPES } from '../../core/constants/constatns';
+import {useAppDispatch, useAppSelector} from '../../core/hooks/redux';
+import {cardSlice} from '../../store/reducers/cards/CardSlice';
+import {DirType, SortType} from '../../core/interface/sort';
 
+const SearchBar: React.FC = () => {
+	const {sort, dir } = useAppSelector(state => state.cardReducer);
+	const {setSortType, setDirType} = cardSlice.actions;
+	const dispatch = useAppDispatch();
 
-type SearchBarProps = {
-	onSearch: (value: string) => void;
-	onSort: (value: string) => void;
-	sortType: string;
-	dirType: string;
-};
+	const handleChangeType = (type: string) => {
+		dispatch(setSortType(type as SortType));
+	}
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onSort, sortType, dirType }) => {
+	const handleChangeDir = (type: string) => {
+		dispatch(setDirType(type as DirType));
+	}
 
 	return (
 		<div className='flex justify-center mb-4 gap-1'>
-			<SearchInput onSearch={onSearch} />
-			<SortInput onSort={onSort} title={sortType} sortOptions={SORT_TYPES} />
-			<SortInput onSort={onSort} title={dirType} sortOptions={SORT_DIR} />
+			<SearchInput />
+			<SortInput onSort={handleChangeType} title={sort} sortOptions={SORT_TYPES} />
+			<SortInput onSort={handleChangeDir} title={dir} sortOptions={SORT_DIR} />
 		</div>
 	);
 };

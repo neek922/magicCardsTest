@@ -9,7 +9,7 @@ class CardsService {
 				// @ts-ignore
 				return await axios.get(`${process.env.SCRYFALL}?${query}`);
 		} else {
-			return {isError: true};
+			return {isNotFound: true};
 		}
 	}
 }

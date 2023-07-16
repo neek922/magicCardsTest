@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import { debounce } from 'lodash';
+import {useAppDispatch} from '../../core/hooks/redux';
+import {cardSlice} from '../../store/reducers/cards/CardSlice';
 
-type SearchInputProps = {
-	onSearch: (value: string) => void;
-};
-
-const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
+const SearchInput: React.FC = () => {
+	const {setSearchString} = cardSlice.actions;
+	const dispatch = useAppDispatch();
 	const [isFocused, setIsFocused] = useState<boolean>(false);
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -13,8 +13,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
 	};
 
 	const debouncedSearch = debounce((value: string) => {
-		onSearch(value);
+		dispatch(setSearchString(value));
 	}, 1000);
+
 	return (
 		<div className='flex justify-center mb-4'>
 			<div className='relative'>

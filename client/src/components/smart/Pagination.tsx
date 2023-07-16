@@ -1,21 +1,25 @@
 import React from 'react';
 import PaginationJS from 'react-js-pagination';
 import { LIMIT_CARDS_ON_PAGE } from '../../core/constants/constatns';
+import {cardSlice} from '../../store/reducers/cards/CardSlice';
+import {useAppDispatch} from '../../core/hooks/redux';
 
-interface PaginationProps {
-	changePage: (pageNumber: number) => void;
-	totalCards: number;
-	activePage: number;
-}
+type PaginationProps = {
+	totalCards: number,
+	activePage: number
+};
 
-const Pagination: React.FC<PaginationProps> = ({ totalCards, changePage, activePage }) => {
-	const handlePageClick = async (pageNumber: number) => {
+const Pagination: React.FC<PaginationProps> = ({totalCards, activePage}) => {
+	const { setCurrentPage } = cardSlice.actions;
+	const dispatch = useAppDispatch()
+
+	const handlePageClick = (number: number) => {
 		window.scrollTo({
 			top: 0,
 			behavior: 'smooth',
 		});
-		changePage(pageNumber + 1);
-	};
+		dispatch(setCurrentPage(number));
+	}
 
 	const itemClass = 'inline-block mr-2 text-gray-700 px-3 py-1 rounded';
 

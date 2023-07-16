@@ -27,3 +27,6 @@ export interface ISortItem {
 	description: string,
 	value: string
 }
+export type SortTypes = 'name' | 'set' | 'released' | 'rarity' | 'color' | 'usd' | 'tix' | 'eur' | 'cmc' | 'power' | 'toughness' | 'edhrec' | 'penny' | 'artist' | 'review' | 'auto' | 'asc' | 'desc';
+export type SortType = 'name' | 'set' | 'released' | 'rarity' | 'color' | 'usd' | 'tix' | 'eur' | 'cmc' | 'power' | 'toughness' | 'edhrec' | 'penny' | 'artist' | 'review' ;
+export type DirType = 'auto' | 'asc' | 'desc';
