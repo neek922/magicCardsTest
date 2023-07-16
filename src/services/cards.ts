@@ -1,22 +1,16 @@
-import type { Request, Response } from 'express';
+import type { Request } from 'express';
 import axios from 'axios';
 import { get } from 'lodash';
 
 class CardsService {
-	async getCards(req: Request, res: Response): Promise<void> {
+	async getCards(req: Request): Promise<object> {
 		const query = get(req, 'body.q', '');
 		if (query) {
-			try {
 				// @ts-ignore
-				const data = await axios.get(`${process.env.SCRYFALL}?${query}`);
-				res.json(data.data);
-			} catch (error) {
-				res.json({isNotFound: true});
-			}
+				return await axios.get(`${process.env.SCRYFALL}?${query}`);
 		} else {
-			res.json({isError: true});
+			return {isError: true};
 		}
-
 	}
 }
 

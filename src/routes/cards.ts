@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import cardsService from '../services/cards';
+import cardsController from "../controllers/cards";
 
 const router = Router();
 
-router.post('/cards', cardsService.getCards);
+router.post('/cards', cardsController.getCards);
 
 export default router;
